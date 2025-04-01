@@ -66,8 +66,7 @@ while running:
     if ball.top <= 0 or ball.bottom >= HEIGHT:
         ball_dy *= -1
         pygame.mixer.Sound("bounce.wav").play()
-
-    # Ball collisions with paddles
+        
     if ball.colliderect(paddle1) or ball.colliderect(paddle2):
         ball_dx *= -1
         pygame.mixer.Sound("bounce.wav").play()
@@ -90,7 +89,7 @@ while running:
     pygame.draw.rect(screen, WHITE, paddle2)
     pygame.draw.ellipse(screen, WHITE, ball)
 
-    # Draw the scoreboard
+    # Scoreboard
     score_text = font.render(f"Player 1: {score1}  Player 2: {score2}", True, WHITE)
     screen.blit(score_text, (WIDTH // 2 - score_text.get_width() // 2, 20))
 
