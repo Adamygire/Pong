@@ -23,8 +23,8 @@ paddle2 = pygame.Rect(WIDTH - 50 - PADDLE_WIDTH, HEIGHT // 2 - PADDLE_HEIGHT // 
 ball = pygame.Rect(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
 
 # Set the initial ball direction and speed
-ball_dx = 0.2
-ball_dy = 0.2
+ball_dx = 2
+ball_dy = 2
 
 # Initialize the scores
 score1 = 0
@@ -65,24 +65,24 @@ while running:
     # Ball collisions with top and bottom
     if ball.top <= 0 or ball.bottom >= HEIGHT:
         ball_dy *= -1
-        pygame.mixer.Sound("bounce.wav").play()
-        
+        #pygame.mixer.Sound("bounce.wav").play()
+
     if ball.colliderect(paddle1) or ball.colliderect(paddle2):
         ball_dx *= -1
-        pygame.mixer.Sound("bounce.wav").play()
+        #pygame.mixer.Sound("bounce.wav").play()
 
     # Scoring
     if ball.left <= 0:
         score2 += 1
         ball.x = WIDTH // 2 - BALL_SIZE // 2
         ball_dx *= -1
-        pygame.mixer.Sound("bounce.wav").play()
+        #pygame.mixer.Sound("bounce.wav").play()
 
     if ball.right >= WIDTH:
         score1 += 1
         ball.x = WIDTH // 2 - BALL_SIZE // 2
         ball_dx *= -1
-        pygame.mixer.Sound("bounce.wav").play()
+        #pygame.mixer.Sound("bounce.wav").play()
 
     # Draw paddles, ball, and scoreboard
     pygame.draw.rect(screen, WHITE, paddle1)
