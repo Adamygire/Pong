@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+from constants import WINDOW_WIDTH, WINDOW_HEIGHT, BALL_SIZE
 
 
 class Paddle:
@@ -7,7 +7,7 @@ class Paddle:
         width = 20
         height = 100
 
-        if position is 'left':
+        if position == 'left':
             location = 50
         else:
             location = WINDOW_WIDTH - 50 - width
@@ -38,9 +38,9 @@ class Ball:
     def is_over_horizontal_edge(self, position='left'):
         passed_left_wall = self.rect.left < 0
         passed_right_wall = self.rect.right > WINDOW_WIDTH
-        if position is 'left':
+        if position == 'left':
             return passed_left_wall
-        elif position is 'right':
+        elif position == 'right':
             return passed_right_wall
         else:
             return passed_left_wall or passed_right_wall

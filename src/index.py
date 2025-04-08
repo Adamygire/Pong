@@ -1,6 +1,6 @@
 
 import pygame
-from constants import *
+from constants import WHITE_COLOR, WINDOW_HEIGHT
 from service import Ball, Paddle
 from ui import Game
 
