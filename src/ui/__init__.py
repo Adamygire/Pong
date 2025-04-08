@@ -1,1 +1,1 @@
-from .game import Game
+from .game_screen import GameScreen
