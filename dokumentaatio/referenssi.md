@@ -2,13 +2,7 @@
 
 # Referemssi 
 
-## Rakenne
-
-Ohjelman rakenne noudattaa kolmitasoista kerrosarkkitehtuuria, ja koodin pakkausrakenne on seuraava:
-
-![Pakkausrakenne](./images/architecture-package.png)
-
-Pakkaus `ui` sisältää käyttöliittymään liittyvän koodin, `services` vastaa pelilogiikasta, ja `repositories` huolehtii tietojen pysyväistallennuksesta. Pakkaus `entities` sisältää pelissä käytettävät olioiden luokat, kuten pelaajat.
+Pakkaus `ui` sisältää käyttöliittymään liittyvän koodin, `services` vastaa pelilogiikasta.
 
 ## Käyttöliittymä
 
@@ -28,23 +22,25 @@ Pelin looginen tietomalli muodostuu luokista [Player](https://github.com/adamygi
 
 ```mermaid
 classDiagram
-    Ball "*" --> "2" Player
-    class Player {
-        name
-        score
+    Ball "*" --> "2" Game
+    class Game {
+        score1
+        score2
+    }
+    class GameScreen {
+        score1
+        score2
     }
     class Ball {
         position
         speed
     }
+    class Paddle {
+        position
+    }
 ```
 
-Pelin logiikka on toteutettu luokassa [GameService](https://github.com/adamygire/pong), joka tarjoaa metodit pelitoimintojen käsittelemiseksi. Näihin metodeihin kuuluvat esimerkiksi:
-
-- `start_game()`
-- `move_paddle()`
-- `update_score(player_id)`
-- `end_game()`
+Pelin logiikka on toteutettu luokassa [Game](https://github.com/adamygire/pong), joka tarjoaa metodit pelitoimintojen käsittelemiseksi.
 
 ### Pakkaus/luokkakaavio
 
