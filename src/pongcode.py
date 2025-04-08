@@ -1,103 +1,150 @@
 import pygame
 import random
 
-# Initialize Pygame
-pygame.init()
 
 # Set up the display
-WIDTH, HEIGHT = 800, 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Pong")
-
-# Define colors
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-
-# Set up the paddles and ball
-PADDLE_WIDTH = 20
-PADDLE_HEIGHT = 100
+WINDOW_WIDTH, WINDOW_HEIGHT = 800, 600
 BALL_SIZE = 20
 
-paddle1 = pygame.Rect(50, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
-paddle2 = pygame.Rect(WIDTH - 50 - PADDLE_WIDTH, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
-ball = pygame.Rect(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
+class Paddle:
+    def __init__(self, position='left'):
+        width = 20
+        height = 100
 
-# Set the initial ball direction and speed
-ball_dx = 2
-ball_dy = 2
+        if position is 'left':
+            location = 50
+        else:
+            location = WINDOW_WIDTH - 50 - width
+        self.rect = pygame.Rect(location, WINDOW_HEIGHT // 2 - height // 2, width, height)
 
-# Initialize the scores
-score1 = 0
-score2 = 0
+class Ball:
+    size = BALL_SIZE
 
-# Set up the font for the scoreboard
-font = pygame.font.SysFont("Courier", 24)
+    def __init__(self):
+        self.rect = pygame.Rect(0, 0, Ball.size, Ball.size)
+        self.recenter()
+        self.dx = 2
+        self.dy = 2
 
-# Initialize clock for controlling frame rate
-clock = pygame.time.Clock()
+    def flip_horizontal(self):
+            self.dx *= -1
 
-# Function to move paddles
-def move_paddle(paddle, up, down):
-    keys = pygame.key.get_pressed()
-    if keys[up] and paddle.top > 0:
-        paddle.y -= 20
-    if keys[down] and paddle.bottom < HEIGHT:
-        paddle.y += 20
+    def flip_vertical(self):
+            self.dy *= -1
 
-# Main game loop
-running = True
-while running:
-    screen.fill(BLACK)
+    def is_over_vertical_edge(self):
+        return self.rect.top <= 0 or self.rect.bottom >= WINDOW_HEIGHT
 
-    # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    def is_over_horizontal_edge(self, position='left'):
+        passed_left_wall = self.rect.left < 0
+        passed_right_wall = self.rect.right > WINDOW_WIDTH
+        if position is 'left':
+            return passed_left_wall
+        elif position is 'right':
+            return passed_right_wall
+        else:
+            return passed_left_wall or passed_right_wall
+    
+    def set_location(self, location):
+        self.rect.x, self.rect.y = location
 
-    # Move paddles
-    move_paddle(paddle1, pygame.K_w, pygame.K_s)
-    move_paddle(paddle2, pygame.K_UP, pygame.K_DOWN)
+    def recenter(self):
+        self.rect.x = WINDOW_WIDTH // 2 - Ball.size // 2
+        self.rect.y = WINDOW_HEIGHT // 2 - Ball.size // 2
 
-    # Move the ball
-    ball.x += ball_dx
-    ball.y += ball_dy
+    def move(self):
+        self.rect.x += self.dx
+        self.rect.y += self.dy
 
-    # Ball collisions with top and bottom
-    if ball.top <= 0 or ball.bottom >= HEIGHT:
-        ball_dy *= -1
-        #pygame.mixer.Sound("bounce.wav").play()
 
-    if ball.colliderect(paddle1) or ball.colliderect(paddle2):
-        ball_dx *= -1
-        #pygame.mixer.Sound("bounce.wav").play()
+def main():
+    # Initialize Pygame
+    pygame.init()
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    pygame.display.set_caption("Pong")
 
-    # Scoring
-    if ball.left <= 0:
-        score2 += 1
-        ball.x = WIDTH // 2 - BALL_SIZE // 2
-        ball_dx *= -1
-        #pygame.mixer.Sound("bounce.wav").play()
+    # Define colors
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
 
-    if ball.right >= WIDTH:
-        score1 += 1
-        ball.x = WIDTH // 2 - BALL_SIZE // 2
-        ball_dx *= -1
-        #pygame.mixer.Sound("bounce.wav").play()
+    # Initialize the scores
+    score1 = 0
+    score2 = 0
 
-    # Draw paddles, ball, and scoreboard
-    pygame.draw.rect(screen, WHITE, paddle1)
-    pygame.draw.rect(screen, WHITE, paddle2)
-    pygame.draw.ellipse(screen, WHITE, ball)
+    # Set up the font for the scoreboard
+    font = pygame.font.SysFont("Courier", 24)
 
-    # Scoreboard
-    score_text = font.render(f"Player 1: {score1}  Player 2: {score2}", True, WHITE)
-    screen.blit(score_text, (WIDTH // 2 - score_text.get_width() // 2, 20))
+    # Initialize clock for controlling frame rate
+    clock = pygame.time.Clock()
 
-    # Update the display
-    pygame.display.flip()
+    # Function to move paddles
+    def move_paddle(paddle, up, down):
+        keys = pygame.key.get_pressed()
+        if keys[up] and paddle.top > 0:
+            paddle.y -= 20
+        if keys[down] and paddle.bottom < WINDOW_HEIGHT:
+            paddle.y += 20
 
-    # Control frame rate (60 FPS)
-    clock.tick(60)
+    left_paddle = Paddle(position='left')
+    right_paddle = Paddle(position='right')
+    ball = Ball()
 
-# Quit Pygame
-pygame.quit()
+    # Main game loop
+    running = True
+    while running:
+        screen.fill(BLACK)
+
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # Move paddles
+        move_paddle(left_paddle.rect, pygame.K_w, pygame.K_s)
+        move_paddle(right_paddle.rect, pygame.K_UP, pygame.K_DOWN)
+
+        ball.move()
+
+        # Ball collisions with top and bottom
+        if ball.is_over_vertical_edge():
+            ball.flip_vertical()
+            pygame.mixer.Sound("./sounds/bounce.mp3").play()
+
+        if ball.rect.colliderect(left_paddle.rect) or ball.rect.colliderect(right_paddle.rect):
+            ball.flip_horizontal()
+            pygame.mixer.Sound("./sounds/bounce.mp3").play()
+
+        # Scoring
+        if ball.is_over_horizontal_edge(position='left'):
+            score2 += 1
+            ball.recenter()
+            ball.flip_horizontal()
+            pygame.mixer.Sound("./sounds/bounce.mp3").play()
+
+        if ball.is_over_horizontal_edge(position='right'):
+            score1 += 1
+            ball.recenter()
+            ball.flip_horizontal()
+            pygame.mixer.Sound("./sounds/bounce.mp3").play()
+
+        # Draw paddles, ball, and scoreboard
+        pygame.draw.rect(screen, WHITE, left_paddle.rect)
+        pygame.draw.rect(screen, WHITE, right_paddle.rect)
+        pygame.draw.ellipse(screen, WHITE, ball.rect)
+
+        # Scoreboard
+        score_text = font.render(f"Player 1: {score1}  Player 2: {score2}", True, WHITE)
+        screen.blit(score_text, (WINDOW_WIDTH // 2 - score_text.get_width() // 2, 20))
+
+        # Update the display
+        pygame.display.flip()
+
+        # Control frame rate (60 FPS)
+        clock.tick(60)
+
+    # Quit Pygame
+    pygame.quit()
+
+
+if __name__ == '__main__':
+    main()
