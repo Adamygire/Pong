@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 
+
 class Paddle:
     def __init__(self, position='left'):
         width = 20
@@ -10,7 +11,9 @@ class Paddle:
             location = 50
         else:
             location = WINDOW_WIDTH - 50 - width
-        self.rect = pygame.Rect(location, WINDOW_HEIGHT // 2 - height // 2, width, height)
+        self.rect = pygame.Rect(location, WINDOW_HEIGHT //
+                                2 - height // 2, width, height)
+
 
 class Ball:
     size = BALL_SIZE
@@ -41,7 +44,7 @@ class Ball:
             return passed_right_wall
         else:
             return passed_left_wall or passed_right_wall
-    
+
     def set_location(self, location):
         self.rect.x, self.rect.y = location
 
@@ -52,4 +55,3 @@ class Ball:
     def move(self):
         self.rect.x += self.dx
         self.rect.y += self.dy
-

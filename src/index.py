@@ -4,6 +4,7 @@ from constants import *
 from service import Ball, Paddle
 from ui import Game
 
+
 def main():
     # Initialize Pygame
     game = Game()

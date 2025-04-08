@@ -1,10 +1,11 @@
 import pygame
 from constants import *
 
+
 class Game:
     def __init__(self):
-        self.score1=0
-        self.score2=0
+        self.score1 = 0
+        self.score2 = 0
         pygame.init()
         pygame.display.set_caption("Pong")
         self.font = pygame.font.SysFont("Courier", 24)
@@ -14,10 +15,11 @@ class Game:
     def clear_screen(self):
         self.screen.fill(BLACK_COLOR)
 
-
     def draw_scoreboard(self):
-        score_text = self.font.render(f"Player 1: {self.score1}  Player 2: {self.score2}", True, WHITE_COLOR)
-        self.screen.blit(score_text, (WINDOW_WIDTH // 2 - score_text.get_width() // 2, 20))
+        score_text = self.font.render(
+            f"Player 1: {self.score1}  Player 2: {self.score2}", True, WHITE_COLOR)
+        self.screen.blit(score_text, (WINDOW_WIDTH // 2 -
+                         score_text.get_width() // 2, 20))
 
     def increase_score(self, player):
         if player == "player1":
@@ -30,7 +32,6 @@ class Game:
 
     def draw_ellipse(self, color, rect):
         pygame.draw.ellipse(self.screen, color, rect)
-
 
     def update_board(self):
         # Update the display
