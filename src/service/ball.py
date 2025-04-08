@@ -1,5 +1,5 @@
 import pygame
-from ..constants import WINDOW_WIDTH, WINDOW_HEIGHT, WHITE_COLOR
+from constants import WINDOW_WIDTH, WINDOW_HEIGHT, WHITE_COLOR
 
 
 class Ball:
