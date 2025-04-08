@@ -1,5 +1,5 @@
 import unittest
-from ..service.ball import Ball
+from service.ball import Ball
 
 class TestBall(unittest.TestCase):
     def setUp(self):

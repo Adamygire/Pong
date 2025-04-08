@@ -1,5 +1,5 @@
 import unittest
-from ..service.paddle import Paddle
+from service.paddle import Paddle
 
 class TestPaddle(unittest.TestCase):
     def setUp(self):
