@@ -15,6 +15,10 @@ Peli toimii Python-versiolla `3.13`.
 - [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
 
+## Lataa peli
+Lataa pelin viimeisimmän [versioon](https://github.com/Adamygire/Pong/releases/tag/viikko5) lähdekoodi klikkaamalla _Source code_.
+
+
 ## Asennus
 
 * Asenna pelin riippuvuudet komennolla:
