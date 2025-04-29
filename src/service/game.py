@@ -47,6 +47,7 @@ class Game:
 
     def play(self):
         """play game"""
+        self.game_screen.wait_for_start()
         running = True
         while running:
             self.game_screen.clear_screen()

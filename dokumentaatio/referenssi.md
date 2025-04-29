@@ -22,14 +22,10 @@ Pelin looginen tietomalli muodostuu luokista [Player](https://github.com/adamygi
 
 ```mermaid
 classDiagram
-    Ball "*" --> "2" Game
-    class Game {
-        score1
-        score2
-    }
+
     class GameScreen {
-        score1
-        score2
+        player1
+        player2
     }
     class Ball {
         position
@@ -59,10 +55,7 @@ Nämä luokat seuraavat [Repository](https://en.wikipedia.org/wiki/Data_access_o
 Peli tallentaa pelaajien ja pisteiden tiedot erillisiin tiedostoihin. Juuri ohjelman hakemistossa sijaitseva `.env`-konfiguraatiotiedosto määrittelee käytettävät tiedostonimet.
 
 Pisteet tallennetaan CSV-tiedostoon seuraavassa formaatissa:
-
-```
-pelaaja1;100;pelaaja2;150
-```
+...
 
 Jokainen rivi edustaa yhtä peliä, jossa on pelaajien nimet ja heidän pisteensä. Kentät erotetaan puolipisteellä.
 
