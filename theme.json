@@ -1,0 +1,10 @@
+{
+    "global": {},
+    "elements": {
+      "#login_message": {
+        "colours": {
+          "normal_text": "#FFFFFF"
+        }
+      }
+    }
+  }

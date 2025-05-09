@@ -44,6 +44,18 @@ class Game:
         self.ball.draw()
         self.game_screen.draw_scoreboard(self.score1, self.score2)
         pygame.display.flip()
+        
+    def handle_game_over(self):
+        if self.score1 >= 5 or self.score2 >= 5:
+            winner = "Player 1" if self.score1 >= 5 else "Player 2"
+            self.game_screen.show_game_over_screen(winner)
+            self.reset_game()
+
+    def reset_game(self):
+        self.score1 = 0
+        self.score2 = 0
+        self.ball.recenter()
+        self.ball.flip_horizontal()
 
     def play(self):
         """play game"""
@@ -55,6 +67,7 @@ class Game:
             self.handle_collisions()
             self.handle_scoring()
             self.move_pieces()
+            self.handle_game_over()
             self.draw_pieces()
 
             self.clock.tick(60)

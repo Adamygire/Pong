@@ -11,3 +11,8 @@ class TestBall(unittest.TestCase):
 
     def test_created_ball_is_not_out_of_bounds(self):
         self.assertFalse(self.ball.is_out_of_bounds())
+        
+    def test_ball_moves_correctly(self):
+        initial_pos = self.ball.rect.topleft
+        self.ball.move()
+        self.assertNotEqual(self.ball.rect.topleft, initial_pos)

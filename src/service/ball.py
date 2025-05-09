@@ -2,6 +2,7 @@ import pygame
 from constants import WINDOW_WIDTH, WINDOW_HEIGHT, WHITE_COLOR
 
 
+
 class Ball:
     size = 20
     center_x, center_y  = (WINDOW_WIDTH // 2 - size // 2, WINDOW_HEIGHT // 2 - size // 2)
@@ -12,14 +13,15 @@ class Ball:
         self.dy = 2
         self.rect = pygame.Rect(0, 0, Ball.size, Ball.size)
         self.recenter()
+        self.bounce_sound = pygame.mixer.Sound("./sounds/bounce.mp3")
 
     def flip_horizontal(self):
         self.dx *= -1
-        pygame.mixer.Sound("./sounds/bounce.mp3").play()
+        self.bounce_sound.play()
 
     def flip_vertical(self):
         self.dy *= -1
-        pygame.mixer.Sound("./sounds/bounce.mp3").play()
+        self.bounce_sound.play()
 
     def handle_collision_with_vertical_edge(self):
         if self.rect.top <= 0 or self.rect.bottom >= WINDOW_HEIGHT:
