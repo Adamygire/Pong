@@ -10,5 +10,7 @@
 | 15.4. | 12   | Harjoitustyö viikko5 |
 | 22.4. | 1    |  Katselmointi |
 | 29.4. | 10   | Harjoitustyö viikko6 |
-| 11.5  | 20   | Loppupalautus |
-| summa | 90   |
+| 09.5  | 10   | Loppupalautus |
+| 10.5  | 10   | Loppupalautus |
+| 11.5  | 10   | Loppupalautus |
+| summa | 100  |

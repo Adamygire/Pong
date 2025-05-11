@@ -7,18 +7,16 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-cowsay = "^6.1"
 pygame = "^2.6.1"
-invoke = "^2.2.0"
-pytest = "^8.3.5"
-pylint = "^3.3.6"
-autopep8 = "^2.3.2"
 pygame-gui = "^0.6.13"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
 coverage = "^7.8.0"
+autopep8 = "^2.3.2"
+pylint = "^3.3.6"
+invoke = "^2.2.0"
 
 [build-system]
 requires = ["poetry-core"]

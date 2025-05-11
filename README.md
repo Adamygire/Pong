@@ -16,7 +16,7 @@ Peli toimii Python-versiolla `3.13`.
 - [Changelog](./dokumentaatio/changelog.md)
 
 ## Lataa peli
-Lataa pelin viimeisimmän [versioon](https://github.com/Adamygire/Pong/releases/tag/viikko5) lähdekoodi klikkaamalla _Source code_.
+Lataa pelin viimeisimmän [versioon](https://github.com/Adamygire/Pong/releases/tag/loppupalautus) lähdekoodi klikkaamalla _Source code_.
 
 
 ## Asennus
@@ -29,26 +29,11 @@ poetry install
 
 * Käynnistä peli komennolla:
 
-```bash
-poetry run invoke start
-```
-
-## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
 
-Pelin voi käynnistää komennolla:
-
 ```bash
 poetry run invoke start
-```
-
-### Testaus
-
-Testit ajetaan komennolla:
-
-```bash
-poetry run invoke test
 ```
 
 ### Testikattavuus
