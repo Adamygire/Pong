@@ -1,10 +1,46 @@
 {
-    "global": {},
-    "elements": {
-      "#login_message": {
-        "colours": {
-          "normal_text": "#FFFFFF"
-        }
+  "global": {
+    "font_path": null,
+    "font_size": 16,
+    "text_color": "#FFFFFF",
+    "selected_text_color": "#000000",
+    "selected_background_color": "#AAAAFF",
+    "background_color": "#222222",
+    "border_width": 1,
+    "border_color": "#555555",
+    "shape": "rectangle"
+  },
+  "elements": {
+    "#login_message": {
+      "colours": {
+        "normal_text": "#FFFFFF"
+      },
+      "font": {
+        "size": 24
+      }
+    },
+    "button": {
+      "colours": {
+        "normal_bg": "#4444AA",
+        "hovered_bg": "#6666CC",
+        "clicked_bg": "#222288",
+        "normal_text": "#FFFFFF",
+        "hovered_text": "#FFFFFF",
+        "clicked_text": "#FFFFFF"
+      }
+    },
+    "label": {
+      "colours": {
+        "normal_text": "#FFFFFF"
+      }
+    },
+    "text_entry_line": {
+      "colours": {
+        "normal_bg": "#333333",
+        "normal_text": "#FFFFFF",
+        "focused_bg": "#555555",
+        "focused_text": "#FFFFFF"
       }
     }
   }
+}
